@@ -38,3 +38,24 @@ public:
     return dummynode->next;
   }
 };
+class Solution
+{ // TC->O(n) SC->O(1)
+public:
+  ListNode *oddEvenList(ListNode *head)
+  {
+    if (!head)
+      return head;
+    ListNode *odd = head;
+    ListNode *even = head->next;
+    ListNode *evenhead = head->next;
+    while (odd->next && even->next)
+    {
+      odd->next = even->next;
+      even->next = odd->next->next;
+      odd = odd->next;
+      even = even->next;
+    }
+    odd->next = evenhead;
+    return head;
+  }
+};
