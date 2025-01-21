@@ -1,4 +1,6 @@
-class Solution
+class Solution // iterative solution
+// T.C->O(3n)
+// S.C->O(1)
 {
 public:
   ListNode *reverse(ListNode *head)
@@ -34,5 +36,33 @@ public:
       return newhead;
     }
     return reverse(head);
+  }
+};
+class Solution // optimal recursive solution
+// T.C->O(n)
+// S.C->O(n)
+{
+public:
+  int recursive(ListNode *temp)
+  {
+    if (temp == NULL)
+    {
+      return 1;
+    }
+    int carry = recursive(temp->next);
+    int data = temp->data;
+    temp->data = (carry + data) % 10;
+    return (carry + data) / 10;
+  }
+  ListNode *addOne(ListNode *head)
+  {
+    int carry = recursive(head);
+    if (carry == 1)
+    {
+      ListNode *newhead = new ListNode(carry);
+      newhead->next = head;
+      return newhead;
+    }
+    return head;
   }
 };
