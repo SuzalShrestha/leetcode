@@ -1,5 +1,5 @@
 class Solution
-{
+{ // bfs slow approach
 public:
   vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc,
                                 int color)
@@ -32,6 +32,36 @@ public:
         }
       }
     }
+    return ans;
+  }
+};
+class Solution
+{ // dfs fast approach
+public:
+  void dfs(vector<vector<int>> &ans, vector<vector<int>> &image, int sr,
+           int sc, int color, int newcolor, vector<pair<int, int>> &dir)
+  {
+    ans[sr][sc] = newcolor;
+    int n = image.size();
+    int m = image[0].size();
+    for (auto d : dir)
+    {
+      int nrow = sr + d.first;
+      int ncol = sc + d.second;
+      if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
+          image[nrow][ncol] == color && ans[nrow][ncol] != newcolor)
+      {
+        dfs(ans, image, nrow, ncol, color, newcolor, dir);
+      }
+    }
+  }
+  vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc,
+                                int color)
+  {
+    vector<vector<int>> ans = image;
+    int init = image[sr][sc];
+    vector<pair<int, int>> dir = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    dfs(ans, image, sr, sc, init, color, dir);
     return ans;
   }
 };
