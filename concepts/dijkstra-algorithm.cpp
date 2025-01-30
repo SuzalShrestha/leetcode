@@ -1,5 +1,5 @@
 class Solution
-{
+{ // note: negative weights doesnot work for dijkstra algorithm as it goes to infinite loop
 public:
   // Function to find the shortest distance of all the vertices
   // from the source vertex src.
