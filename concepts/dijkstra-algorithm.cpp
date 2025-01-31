@@ -32,3 +32,35 @@ public:
     return dist;
   }
 };
+class Solution
+{ // using sets
+public:
+  vector<int> dijkstra(vector<vector<pair<int, int>>> &adj, int src)
+  {
+    set<pair<int, int>> st;
+    int n = adj.size();
+    vector<int> dist(n, 1e9);
+    dist[src] = 0;
+    st.insert({0, src});
+    while (!st.empty())
+    {
+      auto it = *(st.begin());
+      int distance = it.first;
+      int node = it.second;
+      st.erase(it);
+      for (auto it : adj[node])
+      {
+        int edgeWeight = it.second;
+        int neighbour = it.first;
+        if (distance + edgeWeight < dist[neighbour])
+        {
+          if (dist[neighbour] != 1e9)
+            st.erase({dist[neighbour], neighbour});
+          dist[neighbour] = distance + edgeWeight;
+          st.insert({dist[neighbour], neighbour});
+        }
+      }
+    }
+    return dist;
+  }
+};
