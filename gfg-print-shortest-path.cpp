@@ -12,7 +12,7 @@ public:
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     vector<int> dist(n + 1, 1e9);
     vector<int> parent(n + 1);
-    for (int i = 0; i <= n; i++)
+    for (int i = 1; i <= n; i++)
       parent[i] = i;
     dist[1] = 0;
     pq.push({0, 1});
@@ -20,6 +20,7 @@ public:
     {
       int distance = pq.top().first;
       int node = pq.top().second;
+      pq.pop();
       for (auto it : adj[node])
       {
         int edgeWeight = it.second;
@@ -43,6 +44,14 @@ public:
     }
     path.push_back(1);
     reverse(path.begin(), path.end());
-    return path;
+    // return path
+    // gfg specific only
+    vector<int> result;
+    result.push_back(dist[n]); // Add the total weight as the first element
+    for (int num : path)
+    {
+      result.push_back(num);
+    }
+    return result;
   }
 };
