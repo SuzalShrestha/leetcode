@@ -21,11 +21,11 @@ int pivot(int array[], int low, int high)
   int j = high;
   while (i < j)
   {
-    while (array[i] <= pivotele && i <= high)
+    while (i < high && array[i] <= pivotele)
     {
       i++;
     }
-    while (array[j] > pivotele && j >= low)
+    while (j > low && array[j] > pivotele)
     {
       j--;
     }
