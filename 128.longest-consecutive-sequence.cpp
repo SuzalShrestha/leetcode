@@ -56,6 +56,36 @@ public:
   }
 };
 class Solution
+{ // better better solution in leetcode in runtime and space
+public:
+  int longestConsecutive(vector<int> &nums)
+  {
+    if (nums.empty())
+      return 0;
+    int n = nums.size();
+    sort(nums.begin(), nums.end());
+    int longest = 1;
+    int cnt = 0;
+    int lastsmaller = INT_MIN;
+    for (int i = 0; i < n; i++)
+    {
+      int curr = nums[i];
+      if (curr - 1 == lastsmaller)
+      {
+        cnt++;
+        lastsmaller = curr;
+      }
+      else if (curr != lastsmaller)
+      {
+        cnt = 1;
+        lastsmaller = curr;
+      }
+      longest = max(longest, cnt);
+    }
+    return longest;
+  }
+};
+class Solution
 { // optimal solution O(n)
 public:
   int longestConsecutive(vector<int> &nums)
