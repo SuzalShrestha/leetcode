@@ -21,13 +21,13 @@ public:
   }
 };
 class Solution
-{ // recursive solution
+{ // recursive solution O(log2(n))
 public:
   int bs(vector<int> &nums, int target, int low, int high)
   {
     if (high < low)
       return -1;
-    int mid = (low + high) / 2;
+    int mid = low + (high - low) / 2;
     if (nums[mid] == target)
       return mid;
     else if (nums[mid] > target)
@@ -42,3 +42,8 @@ public:
     return bs(nums, target, low, high);
   }
 };
+// Note: overflow case
+// If the length of array is INT_MAX then while calculating mid,
+// we add 2 INT_MAX which cannot be stored in int as it overflows.
+// Thus we either subtract (low+(high-low)/2) or we can use long long datatype.
+// Thus the above solution is valid for only INT_MAX array length.
