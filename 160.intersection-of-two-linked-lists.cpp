@@ -89,3 +89,33 @@ public:
       return collisionPoint(headB, headA, c2 - c1);
   }
 };
+class Solution
+{
+public:
+  ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
+  {
+    if (headA == NULL || headB == NULL)
+      return nullptr;
+    ListNode *temp1 = headA;
+    ListNode *temp2 = headB;
+    while (temp1 != temp2)
+    {
+      temp1 = temp1->next;
+      temp2 = temp2->next;
+      if (temp1 == temp2)
+        return temp1;
+      if (temp1 == NULL)
+      {
+        temp1 = headB;
+      }
+      if (temp2 == NULL)
+      {
+        temp2 = headA;
+      }
+      // this condition will be be taken care of as both null will return null
+      //  if (temp1->next == NULL && temp2->next == NULL)
+      //    return nullptr;
+    }
+    return temp1;
+  }
+};
