@@ -32,3 +32,34 @@ public:
     return res;
   }
 };
+class Solution
+{
+public:
+  void getCombSum2(int i, vector<int> &candidates, int target,
+                   vector<vector<int>> &res, vector<int> &curr)
+  {
+    if (target == 0)
+    {
+      res.push_back(curr);
+      return;
+    }
+    for (int j = i; j < candidates.size(); j++)
+    {
+      if (j > i && candidates[j] == candidates[j - 1])
+        continue;
+      if (candidates[j] > target)
+        break;
+      curr.push_back(candidates[j]);
+      getCombSum2(j + 1, candidates, target - candidates[j], res, curr);
+      curr.pop_back();
+    }
+  }
+  vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
+  {
+    vector<vector<int>> res;
+    vector<int> curr;
+    sort(candidates.begin(), candidates.end());
+    getCombSum2(0, candidates, target, res, curr);
+    return res;
+  }
+};
