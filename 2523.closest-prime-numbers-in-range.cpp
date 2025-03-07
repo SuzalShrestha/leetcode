@@ -1,5 +1,52 @@
 class Solution
-{ // more optimized is prime
+{ // optimal solution using Sieve Of Eratosthenes algorithm O(logn(logn))
+public:
+  vector<int> getsieve(int upperlimit)
+  {
+    vector<int> sievearr(upperlimit + 1, 1); // assume all are prime
+    sievearr[0] = 0;
+    sievearr[1] = 0;
+    for (int i = 2; i * i <= upperlimit; i++)
+    {
+      if (sievearr[i] == 1)
+      {
+        for (int multiple = i * i; multiple <= upperlimit; multiple += i)
+        { // mark all multiples
+          sievearr[multiple] = 0;
+        }
+      }
+    }
+    return sievearr;
+  }
+  vector<int> closestPrimes(int left, int right)
+  {
+    vector<int> sieve = getsieve(right);
+    vector<int> prime;
+    for (int i = left; i <= right; i++)
+    { // copy prime numbers
+      if (sieve[i] == 1)
+        prime.push_back(i);
+    }
+    if (prime.size() < 2)
+      return {-1, -1}; // less than two prime
+
+    int mindiff = INT_MAX;
+    vector<int> closestPair(2, -1);
+    for (int i = 1; i < prime.size(); i++)
+    {
+      int diff = prime[i] - prime[i - 1];
+      if (diff < mindiff)
+      {
+        mindiff = diff;
+        closestPair[0] = prime[i - 1];
+        closestPair[1] = prime[i];
+      }
+    }
+    return closestPair;
+  }
+};
+class Solution
+{ // more optimized isPrime function
 public:
   bool isPrime(int x)
   {
@@ -40,7 +87,7 @@ public:
   }
 };
 class Solution
-{ // correct but time exceeded, inefficent isprime
+{ // better solution but time exceeded, inefficent isPrime function
 public:
   bool isPrime(int x)
   {
