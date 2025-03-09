@@ -22,3 +22,24 @@ public:
     return res;
   }
 };
+class Solution
+{ // using bit manipulation
+public:
+  vector<vector<int>> subsets(vector<int> &nums)
+  {
+    int n = nums.size();
+    int subsets = 1 << n;
+    vector<vector<int>> res;
+    for (int num = 0; num < subsets; num++)
+    {
+      vector<int> arr;
+      for (int i = 0; i < n; i++)
+      {
+        if (num & (1 << i))
+          arr.push_back(nums[i]);
+      }
+      res.push_back(arr);
+    }
+    return res;
+  }
+};
