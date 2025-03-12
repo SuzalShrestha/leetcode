@@ -64,3 +64,14 @@ public:
     return max(poscnt, negcnt);
   }
 };
+class Solution
+{ // using stl
+public:
+  int maximumCount(vector<int> &nums)
+  {
+    int poscnt = nums.end() - std::upper_bound(nums.begin(), nums.end(), 0);
+    int negcnt =
+        std::lower_bound(nums.begin(), nums.end(), 0) - nums.begin();
+    return max(poscnt, negcnt);
+  }
+};
