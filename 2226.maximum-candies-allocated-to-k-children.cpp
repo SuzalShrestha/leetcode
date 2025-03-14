@@ -21,14 +21,12 @@ public:
       return 0;
     int l = 1;
     long long r = sum / k;
-    int res = INT_MIN;
     while (l <= r)
     {
       int mid = (l + r) / 2;
       if (isValid(mid, candies, k))
       {
         l = mid + 1;
-        res = max(res, mid);
       }
       else
         r = mid - 1;
